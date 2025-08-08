@@ -1,7 +1,7 @@
-#include "raylib.h"
+#include "../raylib.h"
 #include "player.h"
-#include "Tela/tamanhos.h"
-#include "Mapa/Mapa_1.h"
+#include "../tela/tamanhos.h" 
+#include "../Mapa/Mapa_1.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

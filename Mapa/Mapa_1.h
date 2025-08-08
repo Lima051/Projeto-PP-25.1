@@ -1,6 +1,6 @@
 #ifndef WORLD
 #define WORLD
-#include "Tela/tamanhos.h"
+#include "../Tela/tamanhos.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

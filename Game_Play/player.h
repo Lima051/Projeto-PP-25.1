@@ -1,6 +1,6 @@
 #ifndef PLAYER
 #define PLAYER
-#include "raylib.h"
+#include "../raylib.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

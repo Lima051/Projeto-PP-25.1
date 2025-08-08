@@ -9,6 +9,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "Game_Play/fruta.h"
+#include "Game_Play/fruta.c"
 
 int main(void) {
 
@@ -16,6 +18,9 @@ int main(void) {
     SetTargetFPS(5);
 
     CriarCobra(40, (S_a/2)+10);
+    CriarFruta(S_l, S_a); // Cria a primeira fruta
+    
+    
     
 
     while (!WindowShouldClose()) {
@@ -27,6 +32,7 @@ int main(void) {
 
             DesenharMapa();
             DesenharCobra();
+            DesenharFruta();
         EndDrawing();
 
     }
