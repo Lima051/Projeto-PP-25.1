@@ -15,13 +15,10 @@
 int main(void) {
 
     InitWindow(S_l, S_a, "snakey labyrinth");
-    SetTargetFPS(5);
+    SetTargetFPS(10);
 
     CriarCobra(40, (S_a/2)+10);
     CriarFruta(S_l, S_a); // Cria a primeira fruta
-    
-    
-    
 
     while (!WindowShouldClose()) {
 

@@ -1,4 +1,7 @@
 #include "fruta.h"
+#include "raylib.h"
+#include "player.h"
+#include "Tela/tamanhos.h"
 
 // Tamanho fixo para a fruta
 #define TAMANHO_FRUTA 20
@@ -31,4 +34,19 @@ void CriarFruta(int screenWidth, int screenHeight) {
 void DesenharFruta() {
     // A função DrawRectangleRec é perfeita pois aceita diretamente um struct Rectangle
     DrawRectangleRec(fruta.rect, fruta.cor);
+}
+
+void ColisaoFruta() {
+    int gridX = Player.corpo[0].x / tam_cobra;
+    int gridY = Player.corpo[0].y / tam_cobra;
+
+    if (fruta.rect.x == gridX * tam_cobra && fruta.rect.y == gridY * tam_cobra) {
+
+        // A cobra comeu a fruta, então aumentamos o tamanho da cobra
+        Player.tamanho++;
+        
+        // Reposiciona a fruta em uma nova posição
+        CriarFruta(GetScreenWidth(), GetScreenHeight());
+        
+    }
 }

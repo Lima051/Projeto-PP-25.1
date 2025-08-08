@@ -19,4 +19,6 @@ void CriarFruta(int screenWidth, int screenHeight);
 // Função para desenhar a fruta na tela
 void DesenharFruta();
 
+void ColisaoFruta();
+
 #endif // FRUTA_H
