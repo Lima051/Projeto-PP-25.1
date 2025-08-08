@@ -1,0 +1,37 @@
+#include "raylib.h"
+#include "menu.c"
+#include "menu.h"
+#include "Game_Play/player.c"
+#include "Game_Play/player.h"
+#include "Mapa/Mapa_1.c"
+#include "Mapa/Mapa_1.h"
+#include "Tela/tamanhos.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(void) {
+
+    InitWindow(S_l, S_a, "snakey labyrinth");
+    SetTargetFPS(5);
+
+    CriarCobra(40, (S_a/2)+10);
+    
+
+    while (!WindowShouldClose()) {
+
+        UpdateCobra();
+
+        BeginDrawing();
+            ClearBackground(BLACK);
+
+            DesenharMapa();
+            DesenharCobra();
+        EndDrawing();
+
+    }
+
+    CloseWindow();
+
+    return 0;
+}
