@@ -30,6 +30,9 @@ int main() {
     while (!WindowShouldClose()) {
 
         UpdateCobra();
+        ColisaoBomba();
+        ColisaoCoroa();
+
 
         BeginDrawing();
             ClearBackground(WHITE);

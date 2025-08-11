@@ -32,11 +32,13 @@ void CriarCoroa() {
     coroa.ativa = true; // A coroa começa ativa
 }
 
-void DesenharCoroa(){
-        
+// VERSÃO CORRETA
+void DesenharCoroa() {
+    // Apenas desenha a coroa SE ela estiver ativa
+    if (coroa.ativa) {
         DrawRectangleRec(coroa.rect, coroa.cor);
+    }
 }
-
 void ColisaoCoroa() {
     // Só checa a colisão se a coroa ainda estiver ativa
     if (!coroa.ativa) {
@@ -50,7 +52,12 @@ void ColisaoCoroa() {
         // Abre passagem para a próxima fase
         Mapa[44][43] = 0;
         Mapa[44][42] = 0;
-        
+        Mapa[44][41] = 0;
+        Mapa[44][40] = 0;
+        Mapa[40][44] = 0;
+        Mapa[41][44] = 0;
+        Mapa[42][44] = 0;
+        Mapa[43][44] = 0;
         coroa.ativa = false; // <-- ESTA É A MÁGICA! A coroa agora está "invisível".
     }
 }
