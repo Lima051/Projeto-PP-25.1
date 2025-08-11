@@ -11,14 +11,20 @@
 #include <string.h>
 #include "Game_Play/fruta.h"
 #include "Game_Play/fruta.c"
+#include "coroa.h"
+#include "coroa.c"
+#include "bomba.h"
+#include "bomba.c"
 
-int main(void) {
+int main() {
 
     InitWindow(S_l, S_a, "snakey labyrinth");
     SetTargetFPS(10);
 
     CriarCobra(40, (S_a/2)+10);
-    CriarFruta(S_l, S_a); // Cria a primeira fruta
+    CriarCoroa();
+
+    CriarFruta(); // Cria a primeira fruta
 
     while (!WindowShouldClose()) {
 
@@ -30,6 +36,7 @@ int main(void) {
             DesenharMapa();
             DesenharCobra();
             DesenharFruta();
+            DesenharCoroa();
         EndDrawing();
 
     }
