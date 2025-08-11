@@ -17,6 +17,8 @@
 #include "Game_Play/coroa.c"
 #include "Game_Play/bomba.h"
 #include "Game_Play/bomba.c"
+#include "Game_Play/ProxFase.h"
+#include "Game_Play/ProxFase.c"
 
 int main() {
 
@@ -34,7 +36,7 @@ int main() {
         UpdateCobra();
         ColisaoBomba();
         ColisaoCoroa();
-
+        ColisaoPortal();
 
         BeginDrawing();
             ClearBackground(WHITE);

@@ -2,6 +2,7 @@
 #include "player.h"
 #include "Tela/tamanhos.h"
 #include "Mapa/Mapa_1.h"
+#include "Mapa/Mapa_2.h"
 #include "bomba.h"
 
 // Tamanho fixo para a bomba
@@ -17,7 +18,7 @@ void CriarBomba(){
     if(faseAtual == 1) {
         do {
             gridX = GetRandomValue(0, (tam_Grade - 1));
-            gridY = GetRandomValue(0, (tam_GradeY - 1));
+            gridY = GetRandomValue(0, (tam_GradeY - 3));
         } while (Mapa[gridY][gridX] == 1);
     } else if(faseAtual == 2) {
         do {

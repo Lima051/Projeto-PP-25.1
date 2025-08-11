@@ -2,9 +2,11 @@
 #include "player.h"
 #include "Tela/tamanhos.h"
 #include "Mapa/Mapa_1.h"
+#include "Mapa/Mapa_2.h"
 #include "coroa.h"
 #include "bomba.h"
 #include "fruta.h"
+#include "ProxFase.h"
 
 // Tamanho fixo para a coroa
 #define TAMANHO_COROA 20
@@ -19,7 +21,7 @@ void CriarCoroa() {
     if(faseAtual == 1) {
         do {
             gridX = GetRandomValue(0, (tam_Grade - 1));
-            gridY = GetRandomValue(0, (tam_GradeY - 1));
+            gridY = GetRandomValue(0, (tam_GradeY - 3));
         } while (Mapa[gridY][gridX] == 1);
     } else if(faseAtual == 2) {
         do {
@@ -46,7 +48,11 @@ void DesenharCoroa() {
     if (coroa.ativa) {
         DrawRectangleRec(coroa.rect, coroa.cor);
     }
+    else {
+        DesenharPortal();
+    }
 }
+
 void ColisaoCoroa() {
     // Só checa a colisão se a coroa ainda estiver ativa
     if (!coroa.ativa) {
@@ -58,20 +64,10 @@ void ColisaoCoroa() {
 
     if (coroa.rect.x == gridX * tam_cobra && coroa.rect.y == gridY * tam_cobra) {
         // Abre passagem para a próxima fase
-        Mapa[44][43] = 0;
-        Mapa[44][42] = 0;
-        Mapa[44][41] = 0;
-        Mapa[44][40] = 0;
-        Mapa[40][44] = 0;
-        Mapa[41][44] = 0;
-        Mapa[42][44] = 0;
-        Mapa[43][44] = 0;
+        Mapa[38][1] = 0;
+        Mapa[38][2] = 0;
+        Mapa[38][3] = 0;
         coroa.ativa = false; // <-- ESTA É A MÁGICA! A coroa agora está "invisível".
 
-        memset(Player.corpo, 0, sizeof(Player.corpo));
-        faseAtual = 2;
-        CriarCobra(Player.inicio.x, Player.inicio.y);
-        CriarFruta();
-        CriarBomba();
     }
 }

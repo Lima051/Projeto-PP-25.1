@@ -21,7 +21,7 @@ void CriarFruta(){
     if(faseAtual == 1) {
         do {
             gridX = GetRandomValue(0, (tam_Grade - 1));
-            gridY = GetRandomValue(0, (tam_GradeY - 1));
+            gridY = GetRandomValue(0, (tam_GradeY - 3));
         } while (Mapa[gridY][gridX] != 0);
     } else if(faseAtual == 2) {
         do {
