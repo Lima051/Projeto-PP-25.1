@@ -14,7 +14,7 @@ extern Fruta fruta;
 
 // --- Protótipos das Funções ---
 // Função para criar a fruta em uma posição aleatória
-void CriarFruta(int screenWidth, int screenHeight);
+void CriarFruta();
 
 // Função para desenhar a fruta na tela
 void DesenharFruta();

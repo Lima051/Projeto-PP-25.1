@@ -30,6 +30,7 @@ void UpdateCobra() {
 
     Colisao();
     ColisaoFruta();
+    DesenharFruta();
     
 }
 

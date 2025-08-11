@@ -8,4 +8,5 @@
 void VerificarColisao();
 void Colisao();
 void DesenharMapa();
+int Mapa[tam_Grade][tam_Grade];
 #endif
