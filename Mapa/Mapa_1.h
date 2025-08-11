@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+extern int faseAtual;
+
 void VerificarColisao();
 void Colisao();
 void DesenharMapa();

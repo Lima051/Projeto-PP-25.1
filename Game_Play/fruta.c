@@ -3,6 +3,7 @@
 #include "player.h"
 #include "Tela/tamanhos.h"
 #include "Mapa/Mapa_1.h"
+#include "Mapa/Mapa_2.h"
 
 // Tamanho fixo para a fruta
 #define TAMANHO_FRUTA 20
@@ -17,11 +18,17 @@ void CriarFruta(){
 
     // Este loop continuará sorteando novas coordenadas
     // até encontrar uma que NÃO seja uma parede (valor 1).
-    do {
-        gridX = GetRandomValue(0, (tam_Grade - 1));
-        gridY = GetRandomValue(0, (tam_Grade - 1));
-    } while (Mapa[gridY][gridX] == 1);
-
+    if(faseAtual == 1) {
+        do {
+            gridX = GetRandomValue(0, (tam_Grade - 1));
+            gridY = GetRandomValue(0, (tam_GradeY - 1));
+        } while (Mapa[gridY][gridX] != 0);
+    } else if(faseAtual == 2) {
+        do {
+            gridX = GetRandomValue(0, (tam_Grade - 1));
+            gridY = GetRandomValue(0, (tam_GradeY - 1));
+        } while (Mapa2[gridY][gridX] != 0);
+    }
     // Quando o código chega aqui, temos certeza de que a posição (gridX, gridY) é válida.
 
     // Agora, convertemos as coordenadas do grid para coordenadas de pixels

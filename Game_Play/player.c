@@ -2,6 +2,7 @@
 #include "player.h"
 #include "../tela/tamanhos.h" 
 #include "../Mapa/Mapa_1.h"
+#include "../Mapa/Mapa_2.h"
 #include "fruta.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,7 +29,11 @@ void UpdateCobra() {
     Player.corpo[0].x += Player.direcao.x;
     Player.corpo[0].y += Player.direcao.y;
 
-    Colisao();
+    if(faseAtual == 1) {
+        Colisao();
+    } else if (faseAtual == 2) {
+        Colisao2();
+    }
     ColisaoFruta();
     DesenharFruta();
     

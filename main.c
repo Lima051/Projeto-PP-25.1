@@ -5,6 +5,8 @@
 #include "Game_Play/player.h"
 #include "Mapa/Mapa_1.c"
 #include "Mapa/Mapa_1.h"
+#include "Mapa/Mapa_2.c"
+#include "Mapa/Mapa_2.h"
 #include "Tela/tamanhos.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -37,7 +39,11 @@ int main() {
         BeginDrawing();
             ClearBackground(WHITE);
 
-            DesenharMapa();
+            if(faseAtual == 1) {
+                DesenharMapa();
+            } else if (faseAtual == 2) {
+                DesenharMapa2();
+            }
             DesenharCobra();
             DesenharFruta();
             DesenharCoroa();
