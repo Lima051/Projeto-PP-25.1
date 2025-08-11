@@ -7,5 +7,5 @@
 
 void VerificarColisao();
 void Colisao();
-
+void DesenharMapa();
 #endif
