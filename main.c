@@ -11,10 +11,10 @@
 #include <string.h>
 #include "Game_Play/fruta.h"
 #include "Game_Play/fruta.c"
-#include "coroa.h"
-#include "coroa.c"
-#include "bomba.h"
-#include "bomba.c"
+#include "Game_Play/coroa.h"
+#include "Game_Play/coroa.c"
+#include "Game_Play/bomba.h"
+#include "Game_Play/bomba.c"
 
 int main() {
 
@@ -23,6 +23,7 @@ int main() {
 
     CriarCobra(40, (S_a/2)+10);
     CriarCoroa();
+    CriarBomba();
 
     CriarFruta(); // Cria a primeira fruta
 
@@ -31,12 +32,13 @@ int main() {
         UpdateCobra();
 
         BeginDrawing();
-            ClearBackground(BLACK);
+            ClearBackground(WHITE);
 
             DesenharMapa();
             DesenharCobra();
             DesenharFruta();
             DesenharCoroa();
+            DesenharBomba();
         EndDrawing();
 
     }

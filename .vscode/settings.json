@@ -10,6 +10,7 @@
 	},
 	"files.associations": {
 		"player.h": "c",
-		"string.h": "c"
+		"string.h": "c",
+		"coroa.h": "c"
 	}
 }

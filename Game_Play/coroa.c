@@ -8,38 +8,49 @@
 #define TAMANHO_COROA 20
 Coroa coroa;
 
-void CriarCoroa(){
+void CriarCoroa() {
+    int gridX;
+    int gridY;
 
-    coroa.rect.x=GetRandomValue(0, (tam_Grade - 1)) * TAMANHO_COROA;
-    coroa.rect.y=GetRandomValue(0, (tam_Grade - 1)) * TAMANHO_COROA;
+    // Este loop continuará sorteando novas coordenadas
+    // até encontrar uma que NÃO seja uma parede (valor 1).
+    do {
+        gridX = GetRandomValue(0, (tam_Grade - 1));
+        gridY = GetRandomValue(0, (tam_Grade - 1));
+    } while (Mapa[gridY][gridX] == 1);
 
-    // Define o tamanho e a cor da coroa
+    // Quando o código chega aqui, temos certeza de que a posição (gridX, gridY) é válida.
+
+    // Agora, convertemos as coordenadas do grid para coordenadas de pixels
+    coroa.rect.x = gridX * TAMANHO_COROA;
+    coroa.rect.y = gridY * TAMANHO_COROA;
+
+    // E definimos o resto das propriedades da coroa
     coroa.rect.width = TAMANHO_COROA;
     coroa.rect.height = TAMANHO_COROA;
-    coroa.cor = GOLD; // Você pode escolher qualquer cor
-
-
+    coroa.cor = GOLD;
+    coroa.ativa = true; // A coroa começa ativa
 }
 
 void DesenharCoroa(){
-        if(Mapa[(int)coroa.rect.x][(int)coroa.rect.y ]!=1){
+        
         DrawRectangleRec(coroa.rect, coroa.cor);
-    }
-    else{
-        DesenharCoroa();
-    }
 }
 
-void ColisaoCoroa(){
+void ColisaoCoroa() {
+    // Só checa a colisão se a coroa ainda estiver ativa
+    if (!coroa.ativa) {
+        return; // Se já foi coletada, não faz mais nada.
+    }
+
     int gridX = Player.corpo[0].x / tam_cobra;
     int gridY = Player.corpo[0].y / tam_cobra;
-        //Tamanho da cobra=7 significa que a cobra comeu 3 frutas  em seguida sem resetar
-        if (coroa.rect.x == gridX * tam_cobra && coroa.rect.y == gridY * tam_cobra && Player.tamanho==7) {
-            //Abre passagem para a próxima fase
-                Mapa[44][43]=0;
-                Mapa[44][42]=0;
 
-
-        }
-
+    if (coroa.rect.x == gridX * tam_cobra && coroa.rect.y == gridY * tam_cobra) {
+        // Abre passagem para a próxima fase
+        Mapa[44][43] = 0;
+        Mapa[44][42] = 0;
+        
+        coroa.ativa = false; // <-- ESTA É A MÁGICA! A coroa agora está "invisível".
+    }
 }

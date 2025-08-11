@@ -11,35 +11,32 @@
 Fruta fruta;
 
 // Implementação da função para criar/reposicionar a fruta
-void CriarFruta() {
-    // Gera uma posição X aleatória dentro dos limites do Mapa
-    fruta.rect.x = GetRandomValue(0, (tam_Grade - 1)) * TAMANHO_FRUTA;
-    
-    // Gera uma posição Y aleatória dentro dos limites da tela
-    fruta.rect.y = GetRandomValue(0, (tam_Grade - 1) ) * TAMANHO_FRUTA;
-                    
+void CriarFruta(){
+    int gridX;
+    int gridY;
 
-    // Define o tamanho e a cor da fruta
+    // Este loop continuará sorteando novas coordenadas
+    // até encontrar uma que NÃO seja uma parede (valor 1).
+    do {
+        gridX = GetRandomValue(0, (tam_Grade - 1));
+        gridY = GetRandomValue(0, (tam_Grade - 1));
+    } while (Mapa[gridY][gridX] == 1);
+
+    // Quando o código chega aqui, temos certeza de que a posição (gridX, gridY) é válida.
+
+    // Agora, convertemos as coordenadas do grid para coordenadas de pixels
+    fruta.rect.x = gridX * TAMANHO_FRUTA;
+    fruta.rect.y = gridY * TAMANHO_FRUTA;
+
+    // E definimos o resto das propriedades da coroa
     fruta.rect.width = TAMANHO_FRUTA;
     fruta.rect.height = TAMANHO_FRUTA;
-    fruta.cor = RED; // Você pode escolher qualquer cor
-
-    // Nota: A lógica "(screenWidth / TAMANHO_FRUTA) - 1" garante que a fruta
-    // sempre apareça alinhada a uma grade, o que é comum em jogos de cobra.
-    // Se quiser uma posição totalmente livre, use:
-    // fruta.rect.x = GetRandomValue(0, screenWidth - fruta.rect.width);
-    // fruta.rect.y = GetRandomValue(0, screenHeight - fruta.rect.height);
+    fruta.cor = RED;
 }
-
 // Implementação da função para desenhar a fruta
 void DesenharFruta() {
-    // A função DrawRectangleRec é perfeita pois aceita diretamente um struct Rectangle
-    if(Mapa[(int)fruta.rect.x][(int)fruta.rect.y ]!=1){
+
         DrawRectangleRec(fruta.rect, fruta.cor);
-    }
-    else{
-        DesenharFruta();
-    }
 }
 
 void ColisaoFruta() {

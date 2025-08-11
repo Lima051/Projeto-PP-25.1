@@ -9,24 +9,31 @@
 Bomba bomba;
 
 void CriarBomba(){
-    bomba.rect.x=GetRandomValue(0, (tam_Grade - 1)) * TAMANHO_BOMBA;
-    bomba.rect.y=GetRandomValue(0, (tam_Grade - 1)) * TAMANHO_BOMBA;
-    
+    int gridX;
+    int gridY;
 
-    // Define o tamanho e a cor da bomba
+    // Este loop continuará sorteando novas coordenadas
+    // até encontrar uma que NÃO seja uma parede (valor 1).
+    do {
+        gridX = GetRandomValue(0, (tam_Grade - 1));
+        gridY = GetRandomValue(0, (tam_Grade - 1));
+    } while (Mapa[gridY][gridX] == 1);
+
+    // Quando o código chega aqui, temos certeza de que a posição (gridX, gridY) é válida.
+
+    // Agora, convertemos as coordenadas do grid para coordenadas de pixels
+    bomba.rect.x = gridX * TAMANHO_BOMBA;
+    bomba.rect.y = gridY * TAMANHO_BOMBA;
+
+    // E definimos o resto das propriedades da coroa
     bomba.rect.width = TAMANHO_BOMBA;
     bomba.rect.height = TAMANHO_BOMBA;
-    bomba.cor = BLACK; // Você pode escolher qualquer cor
+    bomba.cor = BLACK;
 }
 
 void DesenharBomba(){
-
-    if(Mapa[(int)bomba.rect.x][(int)bomba.rect.y ]!=1){
         DrawRectangleRec(bomba.rect, bomba.cor);
-    }
-    else{
-        DesenharBomba();
-    }
+
 }
 void ColisaoBomba() {
     int gridX = Player.corpo[0].x / tam_cobra;

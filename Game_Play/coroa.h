@@ -7,6 +7,8 @@
 typedef struct Coroa {
     Rectangle rect; // Usamos o tipo 'Rectangle' da Raylib, que já tem posição (x, y) e tamanho (width, height)
     Color cor;
+    int colect;
+    bool ativa;
 } Coroa;
 
 extern Coroa coroa;
