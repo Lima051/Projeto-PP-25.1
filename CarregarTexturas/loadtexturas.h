@@ -5,7 +5,7 @@ Texture apple;
 Texture bush;
 Texture crown;
 Texture bombinha;
-Texture menu;
+Texture bgMenu;
 Texture plano;
 Texture snake_body;
 Texture snake_head;
