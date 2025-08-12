@@ -13,9 +13,9 @@
 void DesenharPortal() {
     
     if(faseAtual == 1) {
-        DrawRectangle((1 * TAMANHO), (39 * TAMANHO), TAMANHO, TAMANHO, RED);
-        DrawRectangle((2 * TAMANHO), (39 * TAMANHO), TAMANHO, TAMANHO, RED);
-        DrawRectangle((3 * TAMANHO), (39 * TAMANHO), TAMANHO, TAMANHO, RED);
+        DrawRectangle((1 * TAMANHO), (39 * TAMANHO), TAMANHO, TAMANHO, BROWN);
+        DrawRectangle((2 * TAMANHO), (39 * TAMANHO), TAMANHO, TAMANHO, BROWN);
+        DrawRectangle((3 * TAMANHO), (39 * TAMANHO), TAMANHO, TAMANHO, BROWN);
     }
 }
 

@@ -47,12 +47,36 @@ int Mapa2[tam_Grade][tam_Grade] = {
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-};void DesenharMapa2() {
+};
+MapaTexturas2 mapaTx2;
 
-    for(int y = 0; y < tam_Grade; y++) {
-        for(int x = 0; x < tam_Grade; x++) {
-            if(Mapa2[y][x] == 1) {
-                DrawRectangle(x * tam_cobra, y * tam_cobra, tam_cobra, tam_cobra, BLUE);
+void CarregarMapa2() {
+    mapaTx2.chao = LoadTexture("imgs/plano.png");
+    mapaTx2.parede = LoadTexture("imgs/bush.png");
+}
+
+void DescarregarMapa2() {
+    UnloadTexture(mapaTx2.chao);
+    UnloadTexture(mapaTx2.parede);
+}
+
+void DesenharMapa2() {
+    for (int y = 0; y < tam_Grade; y++) {
+        for (int x = 0; x < tam_Grade; x++) {
+
+            Rectangle dest = { x * tam_cobra, y * tam_cobra, tam_cobra, tam_cobra };
+
+            // chão
+            DrawTexturePro(mapaTx2.chao,
+                           (Rectangle){0, 0, (4*mapaTx2.chao.width), (4*mapaTx2.chao.height)},
+                           dest, (Vector2){0, 0}, 0.0f, WHITE);
+            
+
+            // parede
+            if (Mapa2[y][x] == 1) {
+                DrawTexturePro(mapaTx2.parede,
+                               (Rectangle){0, 0, mapaTx2.parede.width, mapaTx2.parede.height},
+                               dest, (Vector2){0, 0}, 0.0f, WHITE);
             }
         }
     }
@@ -63,9 +87,8 @@ void Colisao2() {
     int gridY = Player.corpo[0].y / tam_cobra;
 
     if (Mapa2[gridY][gridX] == 1) {
-
+        // Reset da cobra
         memset(Player.corpo, 0, sizeof(Player.corpo));
-
         CriarCobra(Player.inicio.x, Player.inicio.y);
     }
 }

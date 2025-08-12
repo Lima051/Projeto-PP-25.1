@@ -29,6 +29,8 @@ int main() {
     
     Carregar();
     CarregarAudios();
+    CarregarMapa1();
+    CarregarMapa2();
     PlayMusicStream(ForestMusic);
     SetMusicVolume(ForestMusic, 0.5f);
     
@@ -63,50 +65,52 @@ int main() {
                     RunCredits(&tela, bgTelaCreditos, bgTelaCreditosBotao);
                 break;
                 case TELA_JOGO:
-                    if(faseAtual == 1){
-                        DesenharMapa();
-                        
-                        // Falas introdutórias
-                        if (fala == 1){
+                    // Desenha mapa da fase atual
+                    if (faseAtual == 1) DesenharMapa();
+                    else if (faseAtual == 2){
+                        DescarregarMapa1();
+                        DesenharMapa2();
+                    } 
+
+                    // Atualiza só se não houver fala
+                    if (fala == 0) {
+                        UpdateCobra();
+                        ColisaoBomba();
+                        ColisaoCoroa();
+                        ColisaoPortal();
+                    }
+
+                    // Desenha elementos comuns
+                    DesenharCobra();
+                    DesenharFruta();
+                    DesenharCoroa();
+                    DesenharBomba();
+
+                    // Controle de falas
+                    if (faseAtual == 1) {
+                        if (fala == 1) {
                             DesenharBalao(balao);
                             Texto1();
-                            if(IsKeyPressed(KEY_ENTER)) fala = 2;
-                        } else if(fala == 2){
+                            if (IsKeyPressed(KEY_ENTER)) fala = 2;
+                        } else if (fala == 2) {
                             DesenharBalao(balao);
                             Texto2();
-                            if(IsKeyPressed(KEY_ENTER)){
-                                fala = 3;
-                            }
+                            if (IsKeyPressed(KEY_ENTER)) fala = 0; // libera jogo
                         }
-                        // Gameplay fase 1
-                        DesenharCobra();
-                        DesenharFruta();
-                        DesenharCoroa();
-                        DesenharBomba();
-                        
-                    } else if(faseAtual == 2){
-                        // Gameplay fase 2
-                        DesenharMapa2();
-                        DesenharCobra();
-                        DesenharFruta();
-                        DesenharCoroa();
-                        DesenharBomba();
-                        
-                        // Falas de encerramento
-                        // Quando a cobra encontra o duo
-                        if (fala == 3){
+                    } else if (faseAtual == 2) {
+                        if (fala == 3) {
                             DesenharBalao(balao);
                             Texto3();
-                            if(IsKeyPressed(KEY_ENTER)) fala = 4;
-                        } else if(fala == 4){
+                            if (IsKeyPressed(KEY_ENTER)) fala = 4;
+                        } else if (fala == 4) {
                             DesenharBalao(balao);
                             Texto4();
-                            if(IsKeyPressed(KEY_ENTER)){
+                            if (IsKeyPressed(KEY_ENTER)) {
                                 fala = 0;
                                 tela = SAIR;
                             }
                         }
-                    } 
+                    }
                 break;
                 case SAIR:
                     sair = 0;
@@ -116,6 +120,7 @@ int main() {
     }
     
     Descarregar();
+    DescarregarMapa2();
     DescarregarAudios();
     CloseAudioDevice();
     CloseWindow();

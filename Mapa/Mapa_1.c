@@ -6,9 +6,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "CarregarTexturas/loadtexturas.h"
-Mapa_STRUCT mapa[tam_Grade][tam_Grade];
-
-
 
 int faseAtual = 1;
 
@@ -51,27 +48,42 @@ int Mapa[tam_Grade][tam_Grade] = {
     {1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1},
     {1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1},
     {1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1},
+    {1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+    {1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-};void DesenharMapa() {
+};
 
-    bush=LoadTexture("imgs/bush.png");
-    for(int y = 0; y < tam_Grade; y++) {
-        for(int x = 0; x < tam_Grade; x++) {
-            if(Mapa[y][x] == 1) {
-                //DrawTextureRec(Texture2D texture, Rectangle source, Vector2 position, Color tint);            // Draw a part of a texture defined by a rectangle
-                mapa[x][y].pos.x=x;
-                mapa[x][y].pos.y=y;
-        DrawTexturePro(
-            bush,
-            (Rectangle){0, 0, mapa[x][y].textura.width, mapa[x][y].textura.height},
-            mapa[x][y].rect,
-            mapa[x][y].pos,
-            0.0f,
-            WHITE
-        );            }
+MapaTexturas1 mapaTx1;
+
+void CarregarMapa1() {
+    mapaTx1.chao = LoadTexture("imgs/plano.png");
+    mapaTx1.parede = LoadTexture("imgs/bush.png");
+}
+
+void DescarregarMapa1() {
+    UnloadTexture(mapaTx1.chao);
+    UnloadTexture(mapaTx1.parede);
+}
+
+void DesenharMapa() {
+    for (int y = 0; y < tam_Grade; y++) {
+        for (int x = 0; x < tam_Grade; x++) {
+
+            Rectangle dest = { x * tam_cobra, y * tam_cobra, tam_cobra, tam_cobra };
+
+            // chão
+            DrawTexturePro(mapaTx1.chao,
+                           (Rectangle){0, 0, (4*mapaTx1.chao.width), (4*mapaTx1.chao.height)},
+                           dest, (Vector2){0, 0}, 0.0f, WHITE);
+            
+
+            // parede
+            if (Mapa[y][x] == 1) {
+                DrawTexturePro(mapaTx1.parede,
+                               (Rectangle){0, 0, mapaTx1.parede.width, mapaTx1.parede.height},
+                               dest, (Vector2){0, 0}, 0.0f, WHITE);
+            }
         }
     }
 }
@@ -81,10 +93,8 @@ void Colisao() {
     int gridY = Player.corpo[0].y / tam_cobra;
 
     if (Mapa[gridY][gridX] == 1) {
-
+        // Reset da cobra
         memset(Player.corpo, 0, sizeof(Player.corpo));
-
         CriarCobra(Player.inicio.x, Player.inicio.y);
     }
 }
-
