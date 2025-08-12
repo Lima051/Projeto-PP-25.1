@@ -10,11 +10,11 @@ Texture plano;
 Texture snake_body;
 Texture snake_head;
 
-Texture jogar;
-Texture creditos;
-Texture sair;
-Texture tela_creditos;
-Texture tela_creditos_botao;
+Texture bgJogar;
+Texture bgCreditos;
+Texture bgSair;
+Texture bgTelaCreditos;
+Texture bgTelaCreditosBotao;
 Texture balao;
 
 #include "loadtexturas.c"
