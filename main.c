@@ -19,7 +19,6 @@
 #include "Game_Play/ProxFase.h"
 #include "Game_Play/ProxFase.c"
 #include "Audios/audios.h"
-
 #include "falas.h"
 
 int main() {
@@ -42,7 +41,6 @@ int main() {
     
     int sair = 1; // sair=0 fecha o jogo
     int fala = 1; // controla a exibição de falas
-    int faseAtual = 1;
 
     TelaAtual tela = TELA_MENU; // controla a tela
     
