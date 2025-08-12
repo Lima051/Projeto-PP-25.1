@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "CarregarTexturas/loadtexturas.h"
 
 void CriarCobra(int x, int y) {
     Player.inicio = (Vector2){x,y};
@@ -15,6 +16,8 @@ void CriarCobra(int x, int y) {
     Player.direcao = (Vector2){0,0};
     Player.velocidade = 0.12f;
     Player.intervaloMovimento = 0.0f;
+    Player.textura_head=snake_head;
+    Player.textura_body=snake_body;
 }
 
 void UpdateCobra() {
@@ -48,7 +51,13 @@ void UpdateCobra() {
 
 void DesenharCobra() {
     for(int i = 0; i < Player.tamanho; i++) {
-        DrawRectangleV(Player.corpo[i], (Vector2){tam_cobra, tam_cobra}, GREEN);
+        if (i!=0){
+            DrawTextureEx(Player.textura_body, Player.corpo[i], 0.0f, 0.020f, WHITE);
+        }
+        else{
+            DrawTextureEx(Player.textura_head, Player.corpo[i], 0.0f, 0.020f, WHITE);
+
+        }
     }
 }
 
