@@ -1,4 +1,5 @@
 #include "menu.h"
+#include "raylib.h"
 
 void RunMenu(TelaAtual *tela, Texture2D bgMenu, Texture2D bgJogar, Texture2D bgCreditos, Texture2D bgSair) {
 
@@ -78,3 +79,4 @@ void RunCredits(TelaAtual *tela, Texture2D bgTelaCreditos, Texture2D bgTelaCredi
     DrawText(rgaw, posX_rgaw, 522, 20, WHITE);
     DrawText(rffn, posX_rffn, 607, 20, WHITE);
 }
+
