@@ -17,7 +17,7 @@ void CriarCobra(int x, int y) {
     Player.velocidade = 0.12f;
     Player.intervaloMovimento = 0.0f;
     Player.textura_head=snake_head;
-    Player.textura_body=snake_body;
+    Player.textura_body=snake_body;   
 }
 
 void UpdateCobra() {
@@ -50,12 +50,12 @@ void UpdateCobra() {
 }
 
 void DesenharCobra() {
-    for(int i = 0; i < Player.tamanho; i++) {
+    for(int i = Player.tamanho-1; i >=0; i--) {
         if (i!=0){
-            DrawTextureEx(Player.textura_body, Player.corpo[i], 0.0f, 0.020f, WHITE);
+            DrawTextureEx(Player.textura_body, Player.corpo[i], 0.0f, 0.030f, WHITE);
         }
         else{
-            DrawTextureEx(Player.textura_head, Player.corpo[i], 0.0f, 0.020f, WHITE);
+            DrawTextureEx(Player.textura_head, Player.corpo[i], 0.0f, 0.035f, WHITE);
 
         }
     }
