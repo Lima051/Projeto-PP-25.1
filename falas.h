@@ -3,7 +3,7 @@
 
 #include "raylib.h"
 
-    void DesenharFalas(Texture2D balao);
+    void DesenharBalao(Texture2D balao);
     void Texto1();
     void Texto2();
     void Texto3();

@@ -1,5 +1,4 @@
 #include "raylib.h"
-#include "menu.c"
 #include "menu.h"
 #include "Game_Play/player.c"
 #include "Game_Play/player.h"
@@ -21,7 +20,6 @@
 #include "Game_Play/ProxFase.c"
 #include "Audios/audios.h"
 
-#include "falas.c"
 #include "falas.h"
 
 int main() {

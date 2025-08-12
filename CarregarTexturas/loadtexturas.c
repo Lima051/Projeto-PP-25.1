@@ -12,13 +12,13 @@ void Carregar(){
     snake_head=LoadTexture("imgs/snake_head.png");
     
     // imagens usadas em menu e créditos
-    Texture2D bgMenu = LoadTexture("imgs/menu.png");
-    Texture2D bgJogar = LoadTexture("imgs/jogar.png");
-    Texture2D bgCreditos = LoadTexture("imgs/creditos.png");
-    Texture2D bgSair = LoadTexture("imgs/sair.png");
-    Texture2D bgTelaCreditos = LoadTexture("imgs/tela_creditos.png");
-    Texture2D bgTelaCreditosBotao = LoadTexture("imgs/tela_creditos_botao.png");
-    Texture2D balao = LoadTexture("imgs/balao.png"); // balão de fala
+     bgMenu = LoadTexture("imgs/menu.png");
+     bgJogar = LoadTexture("imgs/jogar.png");
+     bgCreditos = LoadTexture("imgs/creditos.png");
+     bgSair = LoadTexture("imgs/sair.png");
+     bgTelaCreditos = LoadTexture("imgs/tela_creditos.png");
+     bgTelaCreditosBotao = LoadTexture("imgs/tela_creditos_botao.png");
+     balao = LoadTexture("imgs/balao.png"); // balão de fala
 }
 
 void Descarregar(){

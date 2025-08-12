@@ -5,6 +5,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "CarregarTexturas/loadtexturas.h"
+Mapa_STRUCT mapa[tam_Grade][tam_Grade];
+
+
 
 int faseAtual = 1;
 
@@ -53,11 +57,21 @@ int Mapa[tam_Grade][tam_Grade] = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
 };void DesenharMapa() {
 
+    bush=LoadTexture("imgs/bush.png");
     for(int y = 0; y < tam_Grade; y++) {
         for(int x = 0; x < tam_Grade; x++) {
             if(Mapa[y][x] == 1) {
-                DrawRectangle(x * tam_cobra, y * tam_cobra, tam_cobra, tam_cobra, BLUE);
-            }
+                //DrawTextureRec(Texture2D texture, Rectangle source, Vector2 position, Color tint);            // Draw a part of a texture defined by a rectangle
+                mapa[x][y].pos.x=x;
+                mapa[x][y].pos.y=y;
+        DrawTexturePro(
+            bush,
+            (Rectangle){0, 0, mapa[x][y].textura.width, mapa[x][y].textura.height},
+            mapa[x][y].rect,
+            mapa[x][y].pos,
+            0.0f,
+            WHITE
+        );            }
         }
     }
 }
