@@ -20,13 +20,15 @@
 #include "Game_Play/ProxFase.h"
 #include "Game_Play/ProxFase.c"
 #include "Audios/audios.h"
-#include "CarregarTexturas/loadtexturas.h"
+
+#include "falas.c"
+#include "falas.h"
 
 int main() {
 
     InitWindow(S_l, S_a, "snakey labyrinth");
     InitAudioDevice();
-
+    
     Carregar();
     CarregarAudios();
     PlayMusicStream(ForestMusic);
@@ -36,10 +38,15 @@ int main() {
     CriarCobra(40, (S_a/2)+10);
     CriarCoroa();
     CriarBomba();
-    CriarFruta(); 
+    CriarFruta();
     
+    int sair = 1; // sair=0 fecha o jogo
+    int fala = 1; // controla a exibição de falas
+    int faseAtual = 1;
 
-    while (!WindowShouldClose()) {
+    TelaAtual tela = TELA_MENU; // controla a tela
+    
+    while (!WindowShouldClose() && sair) {
 
         UpdateCobra();
         ColisaoBomba();
@@ -49,20 +56,67 @@ int main() {
 
         BeginDrawing();
             ClearBackground(WHITE);
-
-            if(faseAtual == 1) {
-                DesenharMapa();
-            } else if (faseAtual == 2) {
-                DesenharMapa2();
+            
+            switch(tela){
+                case TELA_MENU:
+                    RunMenu(&tela, bgMenu, bgJogar, bgCreditos, bgSair);
+                break;
+                case TELA_CREDITOS:
+                    RunCredits(&tela, bgTelaCreditos, bgTelaCreditosBotao);
+                break;
+                case TELA_JOGO:
+                    if(faseAtual == 1){
+                        DesenharMapa();
+                        
+                        // Falas introdutórias
+                        if (fala == 1){
+                            DesenharBalao(balao);
+                            Texto1();
+                            if(IsKeyPressed(KEY_ENTER)) fala = 2;
+                        } else if(fala == 2){
+                            DesenharBalao(balao);
+                            Texto2();
+                            if(IsKeyPressed(KEY_ENTER)){
+                                fala = 3;
+                            }
+                        }
+                        // Gameplay fase 1
+                        DesenharCobra();
+                        DesenharFruta();
+                        DesenharCoroa();
+                        DesenharBomba();
+                        
+                    } else if(faseAtual == 2){
+                        // Gameplay fase 2
+                        DesenharMapa2();
+                        DesenharCobra();
+                        DesenharFruta();
+                        DesenharCoroa();
+                        DesenharBomba();
+                        
+                        // Falas de encerramento
+                        // Quando a cobra encontra o duo
+                        if (fala == 3){
+                            DesenharBalao(balao);
+                            Texto3();
+                            if(IsKeyPressed(KEY_ENTER)) fala = 4;
+                        } else if(fala == 4){
+                            DesenharBalao(balao);
+                            Texto4();
+                            if(IsKeyPressed(KEY_ENTER)){
+                                fala = 0;
+                                tela = SAIR;
+                            }
+                        }
+                    } 
+                break;
+                case SAIR:
+                    sair = 0;
+                break;
             }
-            DesenharCobra();
-            DesenharFruta();
-            DesenharCoroa();
-            DesenharBomba();
         EndDrawing();
-
     }
-
+    
     Descarregar();
     DescarregarAudios();
     CloseAudioDevice();
