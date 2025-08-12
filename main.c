@@ -51,7 +51,6 @@ int main() {
         UpdateCobra();
         ColisaoBomba();
         ColisaoCoroa();
-        ColisaoPortal();
         UpdateMusicStream(ForestMusic);
 
         BeginDrawing();
@@ -67,8 +66,10 @@ int main() {
                 case TELA_JOGO:
                     // Desenha mapa da fase atual
                     if (faseAtual == 1) DesenharMapa();
-                    else if (faseAtual == 2){
+                    if (faseAtual == 2){
+
                         DescarregarMapa1();
+
                         DesenharMapa2();
                     } 
 
@@ -77,7 +78,6 @@ int main() {
                         UpdateCobra();
                         ColisaoBomba();
                         ColisaoCoroa();
-                        ColisaoPortal();
                     }
 
                     // Desenha elementos comuns

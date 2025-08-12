@@ -7,7 +7,8 @@
 #include "bomba.h"
 #include "fruta.h"
 #include "ProxFase.h"
-
+#include "Mapa/Mapa_1.h"
+#include "Mapa/Mapa_2.h"
 #define TAMANHO 20
 
 void DesenharPortal() {

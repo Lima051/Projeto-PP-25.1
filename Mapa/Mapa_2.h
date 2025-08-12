@@ -18,7 +18,6 @@ extern MapaTexturas2 mapaTx2;
 
 void CarregarMapa2();
 void DescarregarMapa2();
-void VerificarColisao2();
 void Colisao2();
 void DesenharMapa2();
 

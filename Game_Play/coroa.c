@@ -53,7 +53,9 @@ void DesenharCoroa() {
         );
     }
     else {
+        
         DesenharPortal();
+        ColisaoPortal();
     }
 }
 

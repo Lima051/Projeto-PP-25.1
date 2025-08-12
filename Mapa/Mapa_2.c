@@ -61,22 +61,24 @@ void DescarregarMapa2() {
 }
 
 void DesenharMapa2() {
-    for (int y = 0; y < tam_Grade; y++) {
-        for (int x = 0; x < tam_Grade; x++) {
+    if(faseAtual==2){
+        for (int y = 0; y < tam_Grade; y++) {
+            for (int x = 0; x < tam_Grade; x++) {
 
-            Rectangle dest = { x * tam_cobra, y * tam_cobra, tam_cobra, tam_cobra };
+                Rectangle dest = { x * tam_cobra, y * tam_cobra, tam_cobra, tam_cobra };
 
-            // chão
-            DrawTexturePro(mapaTx2.chao,
-                           (Rectangle){0, 0, (4*mapaTx2.chao.width), (4*mapaTx2.chao.height)},
-                           dest, (Vector2){0, 0}, 0.0f, WHITE);
-            
+                // chão
+                DrawTexturePro(mapaTx2.chao,
+                            (Rectangle){0, 0, (4*mapaTx2.chao.width), (4*mapaTx2.chao.height)},
+                            dest, (Vector2){0, 0}, 0.0f, WHITE);
+                
 
-            // parede
-            if (Mapa2[y][x] == 1) {
-                DrawTexturePro(mapaTx2.parede,
-                               (Rectangle){0, 0, mapaTx2.parede.width, mapaTx2.parede.height},
-                               dest, (Vector2){0, 0}, 0.0f, WHITE);
+                // parede
+                if (Mapa2[y][x] == 1) {
+                    DrawTexturePro(mapaTx2.parede,
+                                (Rectangle){0, 0, mapaTx2.parede.width, mapaTx2.parede.height},
+                                dest, (Vector2){0, 0}, 0.0f, WHITE);
+                }
             }
         }
     }

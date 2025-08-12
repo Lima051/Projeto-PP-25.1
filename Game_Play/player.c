@@ -14,7 +14,7 @@ void CriarCobra(int x, int y) {
     Player.corpo[0] = Player.inicio;
     Player.tamanho = 4;
     Player.direcao = (Vector2){0,0};
-    Player.velocidade = 0.12f;
+    Player.velocidade = 0.30f;
     Player.intervaloMovimento = 0.0f;
     Player.textura_head=snake_head;
     Player.textura_body=snake_body;   
