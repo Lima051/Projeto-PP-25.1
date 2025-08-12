@@ -9,55 +9,89 @@
 #define TAMANHO_FRUTA 20
 
 // Definição da variável global 'fruta' que foi declarada como 'extern' no .h
-Fruta fruta;
+Fruta fruta[MAX_FRUTAS];
 
 // Implementação da função para criar/reposicionar a fruta
 void CriarFruta(){
-    int gridX;
-    int gridY;
 
-    // Este loop continuará sorteando novas coordenadas
-    // até encontrar uma que NÃO seja uma parede (valor 1).
-    if(faseAtual == 1) {
+    for (int i = 0; i < MAX_FRUTAS; i++) {
+        int gridX;
+        int gridY;
+
+        // Este loop continuará sorteando novas coordenadas
+        // até encontrar uma que NÃO seja uma parede (valor 1).
+        if(faseAtual == 1) {
+            do {
+                gridX = GetRandomValue(0, (tam_Grade - 1));
+                gridY = GetRandomValue(0, (tam_GradeY - 3));
+            } while (Mapa[gridY][gridX] != 0);
+        } else if(faseAtual == 2) {
+            do {
+                gridX = GetRandomValue(0, (tam_Grade - 1));
+                gridY = GetRandomValue(0, (tam_GradeY - 1));
+            } while (Mapa2[gridY][gridX] != 0);
+        }
+        // Quando o código chega aqui, temos certeza de que a posição (gridX, gridY) é válida.
+
+        // Agora, convertemos as coordenadas do grid para coordenadas de pixels
+        fruta[i].rect.x = gridX * TAMANHO_FRUTA;
+        fruta[i].rect.y = gridY * TAMANHO_FRUTA;
+
+        // E definimos o resto das propriedades da coroa
+        fruta[i].rect.width = TAMANHO_FRUTA;
+        fruta[i].rect.height = TAMANHO_FRUTA;
+        fruta[i].cor = RED;
+        fruta[i].EAT = EAT; // Associa o som da fruta
+    }
+}
+
+
+void ReposicionarFruta(int i) {
+    int gridX, gridY;
+
+    if (faseAtual == 1) {
         do {
             gridX = GetRandomValue(0, (tam_Grade - 1));
             gridY = GetRandomValue(0, (tam_GradeY - 3));
-        } while (Mapa[gridY][gridX] != 0);
-    } else if(faseAtual == 2) {
+        } while (Mapa[gridY][gridX] == 1);
+    } else if (faseAtual == 2) {
         do {
             gridX = GetRandomValue(0, (tam_Grade - 1));
             gridY = GetRandomValue(0, (tam_GradeY - 1));
-        } while (Mapa2[gridY][gridX] != 0);
+        } while (Mapa2[gridY][gridX] == 1);
     }
-    // Quando o código chega aqui, temos certeza de que a posição (gridX, gridY) é válida.
 
-    // Agora, convertemos as coordenadas do grid para coordenadas de pixels
-    fruta.rect.x = gridX * TAMANHO_FRUTA;
-    fruta.rect.y = gridY * TAMANHO_FRUTA;
-
-    // E definimos o resto das propriedades da coroa
-    fruta.rect.width = TAMANHO_FRUTA;
-    fruta.rect.height = TAMANHO_FRUTA;
-    fruta.cor = RED;
+    fruta[i].rect.x = gridX * TAMANHO_FRUTA;
+    fruta[i].rect.y = gridY * TAMANHO_FRUTA;
+    fruta[i].rect.width = TAMANHO_FRUTA;
+    fruta[i].rect.height = TAMANHO_FRUTA;
+    fruta[i].cor = BLACK;
+    fruta[i].EAT = EAT;
 }
+
 // Implementação da função para desenhar a fruta
 void DesenharFruta() {
-
-        DrawRectangleRec(fruta.rect, fruta.cor);
+    for (int i = 0; i < MAX_FRUTAS; i++) {
+        DrawRectangleRec(fruta[i].rect, fruta[i].cor);
+    }
 }
 
 void ColisaoFruta() {
     int gridX = Player.corpo[0].x / tam_cobra;
     int gridY = Player.corpo[0].y / tam_cobra;
 
-    if (fruta.rect.x == gridX * tam_cobra && fruta.rect.y == gridY * tam_cobra) {
+    
+    for(int i = 0; i < MAX_FRUTAS; i++) {
+        if (fruta[i].rect.x == gridX * tam_cobra && fruta[i].rect.y == gridY * tam_cobra) {
 
-        // A cobra comeu a fruta, então aumentamos o tamanho da cobra
-        Player.tamanho++;
-        
-        // Reposiciona a fruta em uma nova posição
-        CriarFruta();
+            // A cobra comeu a fruta, então aumentamos o tamanho da cobra
+            Player.tamanho++;
+            
+            // Reposiciona a fruta em uma nova posição
+            ReposicionarFruta(i);
 
-        
+            // Toca o som da fruta
+            PlaySound(fruta[i].EAT);
+        }
     }
 }

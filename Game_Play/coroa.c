@@ -40,6 +40,7 @@ void CriarCoroa() {
     coroa.rect.height = TAMANHO_COROA;
     coroa.cor = GOLD;
     coroa.ativa = true; // A coroa começa ativa
+    coroa.Portal = Portal;
 }
 
 // VERSÃO CORRETA
@@ -68,6 +69,6 @@ void ColisaoCoroa() {
         Mapa[38][2] = 0;
         Mapa[38][3] = 0;
         coroa.ativa = false; // <-- ESTA É A MÁGICA! A coroa agora está "invisível".
-
+        PlaySound(coroa.Portal); // Toca o som do portal
     }
 }

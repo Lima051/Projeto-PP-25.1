@@ -2,6 +2,7 @@
 #define COROA_H
 
 #include "../raylib.h"
+#include "../Audios/audios.h"
 
 // Define a estrutura da nossa fruta
 typedef struct Coroa {
@@ -9,6 +10,7 @@ typedef struct Coroa {
     Color cor;
     int colect;
     bool ativa;
+    Sound Portal;
 } Coroa;
 
 extern Coroa coroa;

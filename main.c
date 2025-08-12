@@ -19,17 +19,23 @@
 #include "Game_Play/bomba.c"
 #include "Game_Play/ProxFase.h"
 #include "Game_Play/ProxFase.c"
+#include "Audios/audios.h"
 
 int main() {
 
     InitWindow(S_l, S_a, "snakey labyrinth");
-    SetTargetFPS(10);
+    InitAudioDevice();
 
+    CarregarAudios();
+    PlayMusicStream(ForestMusic);
+    SetMusicVolume(ForestMusic, 0.5f);
+    
+    SetTargetFPS(30);
     CriarCobra(40, (S_a/2)+10);
     CriarCoroa();
     CriarBomba();
-
-    CriarFruta(); // Cria a primeira fruta
+    CriarFruta(); 
+    
 
     while (!WindowShouldClose()) {
 
@@ -37,6 +43,7 @@ int main() {
         ColisaoBomba();
         ColisaoCoroa();
         ColisaoPortal();
+        UpdateMusicStream(ForestMusic);
 
         BeginDrawing();
             ClearBackground(WHITE);
@@ -54,6 +61,8 @@ int main() {
 
     }
 
+    DescarregarAudios();
+    CloseAudioDevice();
     CloseWindow();
 
     return 0;

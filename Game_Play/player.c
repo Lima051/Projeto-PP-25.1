@@ -13,7 +13,8 @@ void CriarCobra(int x, int y) {
     Player.corpo[0] = Player.inicio;
     Player.tamanho = 4;
     Player.direcao = (Vector2){0,0};
-    
+    Player.velocidade = 0.12f;
+    Player.intervaloMovimento = 0.0f;
 }
 
 void UpdateCobra() {
@@ -22,19 +23,25 @@ void UpdateCobra() {
     if (IsKeyPressed(KEY_LEFT) && !(Player.direcao.x > 0)) Player.direcao = (Vector2){-tam_cobra, 0};
     if (IsKeyPressed(KEY_RIGHT) && !(Player.direcao.x < 0)) Player.direcao = (Vector2){tam_cobra, 0};
 
-    for (int i = Player.tamanho - 1; i > 0; i--) {
-        Player.corpo[i] = Player.corpo[i - 1];
-    }
+    Player.intervaloMovimento += GetFrameTime();
 
-    Player.corpo[0].x += Player.direcao.x;
-    Player.corpo[0].y += Player.direcao.y;
+    if (Player.intervaloMovimento >= Player.velocidade) {
+        Player.intervaloMovimento = 0.0f;
 
-    if(faseAtual == 1) {
-        Colisao();
-    } else if (faseAtual == 2) {
-        Colisao2();
+        for (int i = Player.tamanho - 1; i > 0; i--) {
+            Player.corpo[i] = Player.corpo[i - 1];
+        }
+
+        Player.corpo[0].x += Player.direcao.x;
+        Player.corpo[0].y += Player.direcao.y;
+
+        if(faseAtual == 1) {
+            Colisao();
+        } else if (faseAtual == 2) {
+            Colisao2();
+        }
+        ColisaoFruta();
     }
-    ColisaoFruta();
     DesenharFruta();
     
 }
