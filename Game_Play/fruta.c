@@ -4,6 +4,7 @@
 #include "Tela/tamanhos.h"
 #include "Mapa/Mapa_1.h"
 #include "Mapa/Mapa_2.h"
+#include "CarregarTexturas/loadtexturas.h"
 
 // Tamanho fixo para a fruta
 #define TAMANHO_FRUTA 20
@@ -40,7 +41,8 @@ void CriarFruta(){
         // E definimos o resto das propriedades da coroa
         fruta[i].rect.width = TAMANHO_FRUTA;
         fruta[i].rect.height = TAMANHO_FRUTA;
-        fruta[i].cor = RED;
+        
+        fruta[i].textura = LoadTexture("imgs/apple.png");
         fruta[i].EAT = EAT; // Associa o som da fruta
     }
 }
@@ -65,14 +67,19 @@ void ReposicionarFruta(int i) {
     fruta[i].rect.y = gridY * TAMANHO_FRUTA;
     fruta[i].rect.width = TAMANHO_FRUTA;
     fruta[i].rect.height = TAMANHO_FRUTA;
-    fruta[i].cor = BLACK;
-    fruta[i].EAT = EAT;
 }
 
 // Implementação da função para desenhar a fruta
 void DesenharFruta() {
     for (int i = 0; i < MAX_FRUTAS; i++) {
-        DrawRectangleRec(fruta[i].rect, fruta[i].cor);
+        DrawTexturePro(
+            fruta[i].textura,
+            (Rectangle){0, 0, fruta[i].textura.width, fruta[i].textura.height},
+            fruta[i].rect,
+            (Vector2){0, 0},
+            0.0f,
+            WHITE
+        );
     }
 }
 

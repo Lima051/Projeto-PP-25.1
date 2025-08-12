@@ -20,12 +20,14 @@
 #include "Game_Play/ProxFase.h"
 #include "Game_Play/ProxFase.c"
 #include "Audios/audios.h"
+#include "CarregarTexturas/loadtexturas.h"
 
 int main() {
 
     InitWindow(S_l, S_a, "snakey labyrinth");
     InitAudioDevice();
 
+    Carregar();
     CarregarAudios();
     PlayMusicStream(ForestMusic);
     SetMusicVolume(ForestMusic, 0.5f);
@@ -61,6 +63,7 @@ int main() {
 
     }
 
+    Descarregar();
     DescarregarAudios();
     CloseAudioDevice();
     CloseWindow();

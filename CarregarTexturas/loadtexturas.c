@@ -6,7 +6,7 @@ void Carregar(){
     apple=LoadTexture("imgs/apple.png");
     bush=LoadTexture("imgs/bush.png");
     crown=LoadTexture("imgs/crown.png");
-    bomba=LoadTexture("imgs/hole.png");
+    bombinha=LoadTexture("imgs/hole.png");
     menu=LoadTexture("imgs/menu.png");
     plano=LoadTexture("imgs/plano.png");
     snake_body=LoadTexture("imgs/snake_body.png");
@@ -19,7 +19,7 @@ void Descarregar(){
     UnloadTexture(apple);
     UnloadTexture(bush);
     UnloadTexture(crown);
-    UnloadTexture(bomba);
+    UnloadTexture(bombinha);
     UnloadTexture(menu);
     UnloadTexture(plano);
     UnloadTexture(snake_body);
