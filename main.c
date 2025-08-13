@@ -69,6 +69,7 @@ int main() {
                     // Desenha mapa da fase atual
                     if (faseAtual == 1) {
                         DesenharMapa();  
+                        UpdateMusicStream(ForestMusic);
   
                 
                     }
@@ -76,7 +77,7 @@ int main() {
                     if (faseAtual == 2){
 
 
-
+                        UpdateMusicStream(ForestMusic);
                         DesenharMapa2();
                         DesenharCobra2();
                         fala=ColisaoCobra2(fala);

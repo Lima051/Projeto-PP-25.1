@@ -8,8 +8,8 @@ Cobra2 cobra2;
 
 void CriarCobra2() {
     // Posição em grade (grid) do mapa. (1, 2) significa coluna 1, linha 2.
-    int gridX = 2;
-    int gridY = 3;
+    int gridX = 40;
+    int gridY = 2;
 
     // Converte a posição da grade para pixels na tela
     cobra2.rect.x = gridX * tam_cobra; // Usar tam_cobra para alinhar com o grid do jogo
