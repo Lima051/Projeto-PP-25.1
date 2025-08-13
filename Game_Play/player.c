@@ -42,6 +42,7 @@ void UpdateCobra() {
             Colisao();
         } else if (faseAtual == 2) {
             Colisao2();
+            
         }
         ColisaoFruta();
     }

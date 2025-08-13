@@ -20,6 +20,8 @@
 #include "Game_Play/ProxFase.c"
 #include "Audios/audios.h"
 #include "falas.h"
+#include "Game_Play/cobra2.h"
+#include "Game_Play/cobra2.c"
 
 int main() {
 
@@ -38,6 +40,8 @@ int main() {
     CriarCoroa();
     CriarBomba();
     CriarFruta();
+    CriarCobra2();
+    
     
     int sair = 1; // sair=0 fecha o jogo
     int fala = 1; // controla a exibição de falas
@@ -63,12 +67,22 @@ int main() {
                 break;
                 case TELA_JOGO:
                     // Desenha mapa da fase atual
-                    if (faseAtual == 1) DesenharMapa();
+                    if (faseAtual == 1) {
+                        DesenharMapa();  
+  
+                
+                    }
+
                     if (faseAtual == 2){
+
+
+
+                        DesenharMapa2();
+                        DesenharCobra2();
+                        fala=ColisaoCobra2(fala);
 
                         DescarregarMapa1();
 
-                        DesenharMapa2();
                     } 
 
                     // Atualiza só se não houver fala
@@ -79,6 +93,7 @@ int main() {
                     }
 
                     // Desenha elementos comuns
+
                     DesenharCobra();
                     DesenharFruta();
                     DesenharCoroa();
@@ -96,6 +111,7 @@ int main() {
                             if (IsKeyPressed(KEY_ENTER)) fala = 0; // libera jogo
                         }
                     } else if (faseAtual == 2) {
+    
                         if (fala == 3) {
                             DesenharBalao(balao);
                             Texto3();

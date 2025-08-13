@@ -33,5 +33,6 @@ void ColisaoPortal() {
         CriarCobra(Player.inicio.x, Player.inicio.y);
         CriarBomba();
         CriarFruta();
+
     }
 }
